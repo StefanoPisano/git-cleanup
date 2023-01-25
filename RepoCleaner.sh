@@ -72,3 +72,14 @@ FilterReportToFile "$timestamp"
 EmptyFileIfExists "$timestamp"
 WriteFinalReport "$timestamp"
 
+if [ "$1" = "execute" ]
+then
+    echo "Executing automatic cleanup inside $timestamp folder..."
+    EmptyLine
+    cd $timestamp
+    sh final-report.txt
+
+    echo "Completed."
+else
+    echo "Not executing automatic cleanup."
+fi
