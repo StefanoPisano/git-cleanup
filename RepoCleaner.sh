@@ -21,7 +21,7 @@ CreateDirIfNotExists() {
 
     if [ -d "$1" ] 
         then
-            echo "Directory already exists, nothind done here."
+            echo "Directory already exists, nothing done here."
         else
             echo "Directory does not exists, creating new one."
             mkdir $1
