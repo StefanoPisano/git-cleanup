@@ -21,3 +21,6 @@ Simple shell script to clean GIT repositories
 `FilterReportToFile()` Based on the original-report it filters the branches you indicated on the `filteredBranches` variable <br>
 `EmptyFileIfExists()` If the final-report.txt file already exists this function will clear it <br>
 `WriteFinalReport()` Iterate over the pre-final-report.txt and generates git commands to delete the remote branches. It doesn't delete anything, it will only generates the commands
+
+## Automatic clean up
+You could also execute the script passing `execute` as argument, in that case the script will execute all commands inside the final-report.txt file. **at your own risk :D**
