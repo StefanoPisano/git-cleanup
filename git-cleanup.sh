@@ -4,7 +4,7 @@
 current_path=$(pwd)          # The current working directory where the script is executed
 project_dir="$HOME/path-to-my-git-project"  # Path to the project directory
 timestamp=$(date "+%Y%m%d_%H%M")  # Timestamp for creating unique folders and files
-branches_to_filter="master|master_old|develop|HEAD|main"  # Branches to exclude from the final report
+branches_to_filter="master|develop|HEAD|main"  # Branches to exclude from the final report
 main_branch="main"  # The main branch to check for merged branches
 
 # Utility functions
