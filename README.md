@@ -1,4 +1,4 @@
-## Git Cleanup Script
+## Git Cleanup
 
 ### Overview
 This Bash script automates the process of cleaning up remote branches in a Git repository. It identifies branches merged into the main branch, filters them based on predefined patterns, and generates a report with commands to delete them. If executed with the `execute` argument, it performs the branch cleanup automatically.
