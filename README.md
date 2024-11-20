@@ -1,26 +1,93 @@
-# repo-cleaner
-Simple shell script to clean GIT repositories
+## Git Cleanup Script
 
-## Install
-1. Clone the repository and get the script
-2. Open it with your favourite text editor (Notepad++, Notepad, IDEA or whatever you want)
-3. Set your parameters (directories, origin names, filtered branches)
-4. Launch it
-5. Get results in your final-report.txt file (created inside the reports folder) and launch them into the terminal
+### Overview
+This Bash script automates the process of cleaning up remote branches in a Git repository. It identifies branches merged into the main branch, filters them based on predefined patterns, and generates a report with commands to delete them. If executed with the `execute` argument, it performs the branch cleanup automatically.
 
-## Personalization
-`baseDir` home directory for your user <br>
-`baseScriptDir` directory where the script has been saved <br>
-`prjDir` directory of your GIT project <br>
-`timestamp` timestamp used to generate reports folders, by default it will generate something like that: 20230123_1115 <br>
-`filteredBranches` branch to exclude from the final report
+---
 
-## Functions
-`CreateDirIfNotExists()` It will look for a directory named with the current timestamp, if not exists it will create it <br>
-`ListMergedBranchesToFile()` Create a file named original-report.txt with the full list of branches merged inside master <br>
-`FilterReportToFile()` Based on the original-report it filters the branches you indicated on the `filteredBranches` variable <br>
-`EmptyFileIfExists()` If the final-report.txt file already exists this function will clear it <br>
-`WriteFinalReport()` Iterate over the pre-final-report.txt and generates git commands to delete the remote branches. It doesn't delete anything, it will only generates the commands
+### Features
+- **Fetch Updates:** Retrieves the latest changes from the remote repository.
+- **Merged Branch Report:** Generates a list of branches merged into the main branch.
+- **Filtering:** Excludes specific branches and patterns (e.g., `master`, `main`, `HEAD`, `develop`, `release`).
+- **Command Generation:** Prepares `git push --delete` commands for branch cleanup.
+- **Execution Mode:** Optionally executes the cleanup commands.
 
-## Automatic clean up
-You could also execute the script passing `execute` as argument, in that case the script will execute all commands inside the final-report.txt file. **at your own risk :D**
+---
+
+### Prerequisites
+1. Ensure Git is installed and configured on your system.
+2. Verify that you have appropriate permissions to delete branches on the remote repository.
+3. Update the `project_dir` variable in the script to point to your Git project directory.
+
+---
+
+### Usage
+1. **Clone or Download the Script**  
+   Save the script to your desired location and make it executable:
+   ```bash
+   chmod +x git-cleanup.sh
+   ```
+
+2. **Run the Script**  
+   Execute the script without arguments to generate a report only:
+   ```bash
+   ./git-cleanup.sh
+   ```
+
+   To generate the report and delete branches:
+   ```bash
+   ./git-cleanup.sh execute
+   ```
+
+---
+
+### Script Workflow
+1. **Fetch Updates:** Updates local information from the remote repository.
+2. **Create Timestamped Directory:** Organizes output files in a uniquely named folder.
+3. **List Merged Branches:** Identifies branches merged into the main branch (`main` by default).
+4. **Filter Branches:** Excludes unwanted branches and release-related branches.
+5. **Generate Cleanup Commands:** Writes `git push --delete` commands to a final report.
+6. **Execute Commands (Optional):** Deletes branches if `execute` is passed as an argument.
+
+---
+
+### Output
+- **`original-report.txt`:** Full list of merged branches.
+- **`pre-final-report.txt`:** Filtered list of branches.
+- **`final-report.txt`:** Commands to delete branches.
+
+---
+
+### Configuration
+You can customize the following variables:
+- **`project_dir`:** Path to your Git project.
+- **`branches_to_filter`:** Branch patterns to exclude.
+- **`main_branch`:** The main branch used for comparison (default: `main`).
+
+---
+
+### Error Handling
+- The script will display error messages in red if it encounters issues like missing directories or commands failing.
+- Each step is logged with a descriptive message for better traceability.
+
+---
+
+### Example
+```bash
+# Run script in preview mode (generates report only):
+./git-cleanup.sh
+
+# Run script and execute branch cleanup:
+./git-cleanup.sh execute
+```
+
+---
+
+### Notes
+- The script should be run from a directory where it has write permissions.
+- Use caution when running with the `execute` option, as it will permanently delete branches.
+
+---
+
+### License
+This script is provided "as-is" without any warranty. Use at your own risk.
